@@ -1,0 +1,11 @@
+<script src="libs/angular/angular-google-maps.min.js"></script>
+<!--script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQPKP9Ac4eQH-OC6d225LzeP36pFD-Dk0&callback=initMap" async defer></script-->
+<div class="container" id="map_canvas" ng-controller="MapViewCtrl">
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+        <ui-gmap-markers models="events" coords="'self'" icon="'icon'">
+            <ui-gmap-windows show="'showWindow'" closeClick="'closeClick'">
+                <div ng-non-bindable>{{note}}</div>
+            </ui-gmap-windows>
+        </ui-gmap-markers>
+    </ui-gmap-google-map>
+</div>

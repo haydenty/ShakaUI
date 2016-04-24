@@ -1,6 +1,12 @@
-var myApp = angular.module('ngclient', ['ngRoute']);
+var myApp = angular.module('ngclient', ['ngRoute', 'uiGmapgoogle-maps']);
 
-myApp.config(function ($routeProvider, $httpProvider) {
+myApp.config(function ($routeProvider, $httpProvider, uiGmapGoogleMapApiProvider) {
+
+    uiGmapGoogleMapApiProvider.configure({
+        key: 'AIzaSyAQPKP9Ac4eQH-OC6d225LzeP36pFD-Dk0',
+        v: '3.20', //defaults to latest 3.X anyhow
+        libraries: 'weather,geometry,visualization'
+    });
 
     $httpProvider.interceptors.push('TokenInterceptor');
 
@@ -26,6 +32,12 @@ myApp.config(function ($routeProvider, $httpProvider) {
         }).when('/eventList', {
             templateUrl: 'partials/eventList.html',
             controller: 'EventListCtrl',
+            access: {
+                requiredLogin: true
+            }
+        }).when('/mapView', {
+            templateUrl: 'partials/mapView.html',
+            controller: 'MapViewCtrl',
             access: {
                 requiredLogin: true
             }

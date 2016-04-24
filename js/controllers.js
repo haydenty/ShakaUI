@@ -11,7 +11,7 @@ myApp.controller("HeaderCtrl", ['$scope', '$location', 'UserAuthFactory',
   }
 ]);
 
-myApp.controller("HomeCtrl", ['$scope','$http',
+myApp.controller("HomeCtrl", ['$scope', '$http',
   function ($scope, $http) {
         $scope.name = "Home Controller";
         var self = $scope;
@@ -23,8 +23,8 @@ myApp.controller("HomeCtrl", ['$scope','$http',
                 method: 'POST',
                 url: 'http://ec2-52-89-103-111.us-west-2.compute.amazonaws.com:3000/api/v1/drop',
                 headers: {
-                     'Content-Type': 'application/json', //TODO can i use the TokenInterceptor
-                    'X-Access-Token': sessionStorage.token                  
+                    'Content-Type': 'application/json', //TODO can i use the TokenInterceptor
+                    'X-Access-Token': sessionStorage.token
                 },
                 data: {
                     latitude: self.latBox,
@@ -38,18 +38,18 @@ myApp.controller("HomeCtrl", ['$scope','$http',
             });
 
         };
-      self.GetCurrentLocation = function () {
-          if (navigator.geolocation) {    navigator.geolocation.getCurrentPosition(self.showPosition);
-    } 
-          else { 
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-      };
-      
-      self.showPosition = function(position){
-        self.latBox = position.coords.latitude;
-          self.longBox = position.coords.longitude;
-      };
+        self.GetCurrentLocation = function () {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(self.showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        };
+
+        self.showPosition = function (position) {
+            self.latBox = position.coords.latitude;
+            self.longBox = position.coords.longitude;
+        };
   }
 ]);
 
@@ -61,5 +61,23 @@ myApp.controller("EventListCtrl", ['$scope', 'dataFactory',
             $scope.events = data.data;
         });
 
+  }
+]);
+
+myApp.controller("MapViewCtrl", ['$scope', 'dataFactory', 'uiGmapGoogleMapApi',
+  function ($scope, dataFactory) {
+        $scope.map = {
+            center: {
+                latitude: 42.732667,
+                longitude: -90.48758
+            },
+            zoom: 12
+        };
+
+        $scope.events = [];
+
+        dataFactory.getEvents().then(function (data) {
+            $scope.events = data.data;
+        });
   }
 ]);

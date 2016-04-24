@@ -8,7 +8,7 @@ myApp.controller('LoginCtrl', ['$scope', '$window', '$location', 'UserAuthFactor
             firstname: '',
             lastname: ''
         };
-      $scope.errorMessage = '';
+        $scope.errorMessage = '';
 
         $scope.login = function () {
 
@@ -51,12 +51,11 @@ myApp.controller('LoginCtrl', ['$scope', '$window', '$location', 'UserAuthFactor
                     }).error(function (status) {
                         alert('Oops something went wrong, when we tried to create your account try again please' + status);
                     });
-                }
-                else {
-                 $scope.errorMessage = 'Make sure to fill everything in, cheers!';
+                } else {
+                    $scope.errorMessage = 'Make sure to fill everything in, cheers!';
                 }
             } else {
-            $scope.errorMessage = "Passwords don't match";
+                $scope.errorMessage = "Passwords don't match";
             }
         };
 

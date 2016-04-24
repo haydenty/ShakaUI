@@ -1,22 +1,21 @@
-<div ng-controller="HomeCtrl">
+<div class="container" ng-controller="HomeCtrl">
     <div class="page-header">
-        <h2>Movement On Dreams Stand Under None</h2>
+        <h3>Movement On Dreams Stand Under None</h3>
     </div>
     <div class="row" align="center">
-        <div class="col-md-3"><button ng-click="GetCurrentLocation()">Set Location</button>
-            <div class="form-group">              
-                <label for="latBox">Latitude:</label>
-                <input type="text" id="latBox" ng-model="latBox" />
-                <label for="longBox">Longitude:</label>
-                <input type="text" id="longBox" ng-model="longBox" />
-            </div>
-            <div class="form-group">
-                <input type="text" id="message" style="height:100px;width:300px;" ng-model="messageBox" placeholder="Enter message here" />
-            </div>
-            <div class="form-group">
-                <button ng-click="CreateDrop()">Create Note</button>
-                <div>{{responseText}}</div>
-            </div>
+        <button class="btn" ng-click="GetCurrentLocation()">Set Location</button>
+        <div class="form-group">
+            <label>Latitude:</label>
+            <input type="text" class="form-control" style="width:300px" ng-model="latBox" />
+            <label>Longitude:</label>
+            <input type="text" class="form-control" style="width:300px" ng-model="longBox" />
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="message" style="height:100px;width:300px;" ng-model="messageBox" placeholder="Enter message here" />
+        </div>
+        <div class="form-group">
+            <button class="btn" ng-click="CreateDrop()">Create Note</button>
+            <div>{{responseText}}</div>
         </div>
     </div>
 </div>
