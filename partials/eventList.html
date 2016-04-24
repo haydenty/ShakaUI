@@ -1,0 +1,24 @@
+<div class="container" ng-controller="EventListCtrl">
+    <div class="page-header">
+        <h3>List of events from the REST API</h3>
+    </div>
+    <p class="lead">
+        <table class="table table-striped">
+            <tr>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Note</th>
+                <th>User</th>
+                <th>Creation Date</th>
+            </tr>
+            <tr ng-repeat="e in events">
+                <td>{{e.latitude}}</td>
+                <td>{{e.longitude}}</td>
+                <td>{{e.note}}</td>
+                <td>{{e.user_id}}</td>
+                <td>{{e.creation}}</td>
+            </tr>
+        </table>
+    </p>
+
+</div>
