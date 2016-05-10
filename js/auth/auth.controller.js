@@ -9,13 +9,17 @@ myApp.controller('LoginCtrl', ['$scope', '$window', '$location', 'UserAuthFactor
             lastname: ''
         };
         $scope.errorMessage = '';
-
+        $scope.keyPress = function (keyCode) {
+            if (keyCode == 13)
+                $scope.login();
+        };
         $scope.login = function () {
 
             var username = $scope.user.username,
                 password = $scope.user.password;
+            $scope.errorMessage = ''; //clears the error message when they go to try for second time
 
-            if (username !== undefined && password !== undefined) {
+            if (username !== '' && password !== '') {
                 UserAuthFactory.login(username, password).success(function (data) {
 
                     AuthenticationFactory.isLogged = true;
@@ -29,10 +33,16 @@ myApp.controller('LoginCtrl', ['$scope', '$window', '$location', 'UserAuthFactor
                     $location.path("/");
 
                 }).error(function (status) {
-                    alert('Oops something went wrong!');
+                    if (status.message == "Invalid credentials!") {
+                        $scope.errorMessage = "Looks like we couldn't find a username associated with that password, please try again.";
+                    } else
+                        $scope.errorMessage = status.message;
                 });
             } else {
-                alert('Invalid credentials');
+                if (password == '' && username !== '')
+                    $scope.errorMessage = 'Make sure to enter your password';
+                else if (username == '' && password !== '')
+                    $scope.errorMessage = 'Make sure to enter your username';
             }
 
         };
@@ -44,18 +54,21 @@ myApp.controller('LoginCtrl', ['$scope', '$window', '$location', 'UserAuthFactor
                 email = $scope.user.email,
                 firstname = $scope.user.firstname,
                 lastname = $scope.user.lastname;
+
+            $scope.errorMessage = ''; //clears the error message when they go to try for second time
+
             if (password == vpassword) {
-                if (username !== '' && password !== '' && firstname !== '' && lastname !== '') {
+                if (username !== '' && password !== '' && firstname !== '' && lastname !== '' && email !== undefined) {
                     UserAuthFactory.register(firstname, lastname, email, username, password).success(function (data) {
                         $scope.login();
                     }).error(function (status) {
-                        alert('Oops something went wrong, when we tried to create your account try again please' + status);
+                        $scope.errorMessage = 'Oops look like we messed somthing up, please try again' + status;
                     });
                 } else {
                     $scope.errorMessage = 'Make sure to fill everything in, cheers!';
                 }
             } else {
-                $scope.errorMessage = "Passwords don't match";
+                $scope.errorMessage = "Passwords don't match, please try again";
             }
         };
 

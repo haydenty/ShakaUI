@@ -17,7 +17,7 @@ myApp.controller("HomeCtrl", ['$scope', '$http',
         var self = $scope;
         self.latBox = 42.732667;
         self.longBox = -90.487580;
-        self.messageBox = "First drop";
+        self.messageBox = "";
         self.CreateDrop = function () {
             $http({
                 method: 'POST',
@@ -36,7 +36,6 @@ myApp.controller("HomeCtrl", ['$scope', '$http',
             }, function errorCallback(response) {
                 self.responseText = "Failed: " + response.message;
             });
-
         };
         self.GetCurrentLocation = function () {
             if (navigator.geolocation) {
@@ -66,12 +65,19 @@ myApp.controller("EventListCtrl", ['$scope', 'dataFactory',
 
 myApp.controller("MapViewCtrl", ['$scope', 'dataFactory', 'uiGmapGoogleMapApi',
   function ($scope, dataFactory) {
+        $scope.options = {
+            disableDefaultUI: true
+        };
+        $scope.pos = {
+            lat: 42.732667,
+            lng: -90.487580
+        };
         $scope.map = {
             center: {
-                latitude: 42.732667,
-                longitude: -90.48758
+                latitude: $scope.pos.lat,
+                longitude: $scope.pos.lng
             },
-            zoom: 12
+            zoom: 15
         };
 
         $scope.events = [];

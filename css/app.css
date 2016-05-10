@@ -5,3 +5,9 @@ body > .container {
 .angular-google-map-container {
     height: 400px;
 }
+
+input:required:invalid,
+input:focus:invalid {
+    /* insert your own styles for invalid form input */
+    -moz-box-shadow: none;
+}
