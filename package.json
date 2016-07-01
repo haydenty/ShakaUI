@@ -1,0 +1,8 @@
+{
+    "name": "Shaka_UI",
+    "description": "This is the UI for Shaka.",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+    }
+}
